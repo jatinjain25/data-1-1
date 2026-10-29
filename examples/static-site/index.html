@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Example site</title>
+  <!-- The tracker, through a same-origin proxy (/ke.js and /ke are rewrites to
+       your Data 1-1 deployment - see AGENTS.md step 6). -->
+  <script defer src="/ke.js" data-endpoint="/ke"></script>
+  <style>
+    body { font: 16px/1.5 system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+    nav a { margin-right: 12px; } button { margin: 4px 8px 4px 0; padding: 8px 14px; }
+    .box { border: 1px solid #ddd; border-radius: 10px; padding: 14px 16px; margin: 18px 0; }
+  </style>
+</head>
+<body>
+  <nav><a href="/">Home</a><a href="/pricing.html">Pricing</a><a href="https://github.com">GitHub (outbound)</a></nav>
+  <h1>Example site</h1>
+  <p>Browse around, then open the dashboard. Stay 5 seconds and you count as a person; keep moving the mouse and your reading time adds up.</p>
+
+  <div class="box">
+    <b>Custom event</b><br />
+    <button onclick="siteData.track('signup_started', { plan: 'pro' })">siteData.track("signup_started")</button>
+  </div>
+  <div class="box">
+    <b>Sign in (identify)</b><br />
+    <button onclick="siteData.identify('user_' + Math.floor(Math.random() * 1000), { email: 'demo' + Math.floor(Math.random() * 1000) + '@example.com', name: 'Demo person' })">siteData.identify(...)</button>
+  </div>
+  <div class="box">
+    <b>Survey answer</b> (needs <code>modules.survey</code> on, with these question ids)<br />
+    <button onclick="siteData.track('survey_shown'); siteData.answer({ goal: ['learn'], role: 'student' })">siteData.answer(...)</button>
+  </div>
+  <p style="color:#777">Your visitor id: <code id="vid"></code> - pass it to checkout as <code>metadata.site_visitor_id</code>.</p>
+  <script>addEventListener('load', function () { setTimeout(function () { document.getElementById('vid').textContent = window.siteData ? siteData.visitorId() : '(tracker blocked?)'; }, 300); });</script>
+</body>
+</html>

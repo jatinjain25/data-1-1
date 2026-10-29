@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing · Example site</title>
+  <script defer src="/ke.js" data-endpoint="/ke"></script>
+  <style>body { font: 16px/1.5 system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; } nav a { margin-right: 12px; }</style>
+</head>
+<body>
+  <nav><a href="/">Home</a><a href="/pricing.html">Pricing</a></nav>
+  <h1>Pricing</h1>
+  <p>Pro, $49/month. <button onclick="siteData.track('checkout_started', { plan: 'pro' })">Buy</button></p>
+</body>
+</html>

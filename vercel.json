@@ -1,0 +1,32 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/*.js": { "includeFiles": "{server/**,sql/**,site.config.js}", "maxDuration": 60 }
+  },
+  "crons": [
+    { "path": "/api/cron", "schedule": "30 2 * * *" }
+  ],
+  "rewrites": [
+    { "source": "/((?!api/|assets/|t\\.js|favicon).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/t.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ]
+}

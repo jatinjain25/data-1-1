@@ -1,0 +1,35 @@
+{
+  "name": "data-1-1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Your own analytics: who is on your site, where they came from, what they did, what they paid and what each ad earned. Hand this repo to your coding agent.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=18.17" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "vite build && node scripts/build-tracker.mjs",
+    "start": "node server.js",
+    "migrate": "node scripts/migrate.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "seed-demo": "node scripts/seed-demo.mjs",
+    "example": "node scripts/example-site.mjs",
+    "secret": "node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"",
+    "ranges": "node scripts/build-datacentre-ranges.mjs",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "jose": "^5.10.0",
+    "pg": "^8.13.0"
+  },
+  "optionalDependencies": {
+    "@electric-sql/pglite": "^0.3.16"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "esbuild": "^0.21.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^5.4.21"
+  }
+}
